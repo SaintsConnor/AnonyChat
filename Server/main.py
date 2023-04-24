@@ -23,6 +23,8 @@ server.listen()
 clients = []
 nicknames = []
 
+admin_nick = "[ENTER ADMIN NICKNAME]"
+admin_pass = "[ENTER ADMIN PASSWORD]"
 
 # 1.Broadcasting Method
 def broadcast(message):
@@ -84,11 +86,11 @@ def receive():
             client.close()
             continue
 
-        if nickname == 'Admin':
+        if nickname == admin_nick:
             client.send('PASS'.encode('ascii'))
             password = client.recv(1024).decode('ascii')
             # I know it is lame, but my focus is mainly for Chat system and not a Login System
-            if password != '[INPUT CUSTOM ADMIN PASSWORD]':
+            if password != admin_pass:
                 client.send('REFUSE'.encode('ascii'))
                 client.close()
                 continue
