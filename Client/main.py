@@ -31,7 +31,7 @@ def enter_server():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Connect to a host
     client.connect((ip, port))
-    public_server = rsa.PublicKey.load_pcks1(client.recv(1024)))
+    public_server = rsa.PublicKey.load_pcks1(client.recv(1024))
     client.send(public_key.savepkcs1("PEM"))
     
 
