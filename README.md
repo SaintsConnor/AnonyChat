@@ -43,3 +43,14 @@ Alternatively, contact the lead developer if you would like to be a main develop
 Any vulnerabilities are taken seriously and regular updates will be given to fix them. If discovered please email Connor on: ssgconnor@proton.me
 
 **LICENSE**
+This software is under the: "GNU GENERAL PUBLIC LICENSE v3.0". Below is a TLDR of this. 
+
+1. Anyone can copy, modify and distribute this software.
+2. You have to include the license and copyright notice with each and every distribution.
+3. You can use this software privately.
+4. You can use this software for commercial purposes.
+5. If you dare build your business solely from this code, you risk open-sourcing the whole code base.
+6. If you modify it, you have to indicate changes made to the code.
+7. Any modifications of this code base MUST be distributed with the same license, GPLv3.
+8. This software is provided without warranty.
+9. The software author or license can not be held liable for any damages inflicted by the software.
