@@ -1,15 +1,23 @@
 import threading
 import socket
+import rsa as RSA
+import urllib.request
+
+external_ip = urllib.request.urlopen('https://ident.me').read().decode('utf8')
+
+public_key, private_key = rsa.newkeys(1024)
+public_clients = []
 
 # Now this Host is the IP address of the Server, over which it is running.
 # I've user my localhost.
-host = "192.168.2.104"
+host = external_ip
 port = 5555  # Choose any random port which is not so common (like 80)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Bind the server to IP Address
 server.bind((host, port))
 # Start Listening Mode
+print(f'Listening on {host}:{port}')
 server.listen()
 # List to contain the Clients getting connected and nicknames
 clients = []
@@ -19,14 +27,13 @@ nicknames = []
 # 1.Broadcasting Method
 def broadcast(message):
     for client in clients:
-        client.send(message)
-
+        client.send(rsa.encrypt(message, public_clients[client]))
 
 # 2.Receiving Messages from client then broadcasting
 def handle(client):
     while True:
         try:
-            msg = message = client.recv(1024)
+            msg = message = rsa.decrypt(client.recv(1024), private_key)
             if msg.decode('ascii').startswith('KICK'):
                 if nicknames[clients.index(client)] == 'admin':
                     name_to_kick = msg.decode('ascii')[5:]
@@ -65,6 +72,9 @@ def receive():
         # Ask the clients for Nicknames
         client.send('NICK'.encode('ascii'))
         nickname = client.recv(1024).decode('ascii')
+        client.send(public_key.savepkcs1("PEM"))
+        public_clients.append(rsa.PublicKey.load_pcks1(client.recv(1024)))
+                
         # If the Client is an Admin prompt for the password.
         with open('bans.txt', 'r') as f:
             bans = f.readlines()
@@ -74,11 +84,11 @@ def receive():
             client.close()
             continue
 
-        if nickname == 'admin':
+        if nickname == 'Admin':
             client.send('PASS'.encode('ascii'))
             password = client.recv(1024).decode('ascii')
             # I know it is lame, but my focus is mainly for Chat system and not a Login System
-            if password != 'adminpass':
+            if password != '[INPUT CUSTOM ADMIN PASSWORD]':
                 client.send('REFUSE'.encode('ascii'))
                 client.close()
                 continue
