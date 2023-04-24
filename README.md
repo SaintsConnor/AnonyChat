@@ -1,7 +1,7 @@
 # AnonyChat
 A fully decentralised chat program using RSA Encryption.
 
-**Features** /
+**Features** 
 - RSA Encrypted Chatroom
 - Unlimited Clients 
 - Ban/Kick Functionality
