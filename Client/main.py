@@ -2,7 +2,10 @@ import socket
 import threading
 import json
 import os
+import rsa
 
+public_key, private_key = rsa.newkeys(1024)
+public_server = None
 
 def enter_server():
     os.system('cls||clear')
@@ -28,6 +31,9 @@ def enter_server():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Connect to a host
     client.connect((ip, port))
+    public_server = rsa.PublicKey.load_pcks1(client.recv(1024)))
+    client.send(public_key.savepkcs1("PEM"))
+    
 
 
 def add_server():
@@ -63,7 +69,7 @@ def receive():
         if stop_thread:
             break
         try:
-            message = client.recv(1024).decode('ascii')
+            message = rsa.decrypt(client.recv(1024).decode("ASCII"), private_key)
             if message == 'NICK':
                 client.send(nickname.encode('ascii'))
                 next_message = client.recv(1024).decode('ascii')
@@ -95,14 +101,14 @@ def write():
             if nickname == 'admin':
                 if message[len(nickname) + 2:].startswith('/kick'):
                     # 2 for : and whitespace and 6 for /KICK_
-                    client.send(f'KICK {message[len(nickname) + 2 + 6:]}'.encode('ascii'))
+                    client.send(rsa.encrypt(f'KICK {message[len(nickname) + 2 + 6:]}'.encode('ascii'), public_server))
                 elif message[len(nickname) + 2:].startswith('/ban'):
                     # 2 for : and whitespace and 5 for /BAN
-                    client.send(f'BAN {message[len(nickname) + 2 + 5:]}'.encode('ascii'))
+                    client.send(rsa.encrypt(f'BAN {message[len(nickname) + 2 + 5:]}'.encode('ascii'), public_server))
             else:
                 print("Commands can be executed by Admins only !!")
         else:
-            client.send(message.encode('ascii'))
+            client.send(rsa.encrypt(message.encode('ascii'), public_server))
 
 
 receive_thread = threading.Thread(target=receive)
