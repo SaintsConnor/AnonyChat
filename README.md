@@ -27,8 +27,8 @@ Disclaimer: The server will be able to log messages if configured to do so.
 *Please note that you will to connect to the server yourself. If it is hosted on the pc you are connecting to, please use localhost as server name. Otherwise use the public IP address and port*
 
 
-**Upcoming Features** \
-- Direct Messaging \
+**Upcoming Features** 
+- Direct Messaging 
 - Server Channels
 - File Transfers
 - Voice Chat
