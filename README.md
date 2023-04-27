@@ -50,6 +50,19 @@ Any vulnerabilities are taken seriously and regular updates will be given to fix
 - The ban/kick functionality may not work properly in some cases.
 - Characters may not display properly in the chatroom due to encoding issues (Fix In Progress).
 
+## Version Control 🚀
+
+AnonyChat uses Git for version control. Each release is tagged with a version number and a codename.
+
+### Release History 📜
+
+- v0.1 (Alpha) - "First Steps" 🐣
+- v0.2 (Alpha) - "Encryption Update" 🔒
+- v0.3 (Alpha) - "Networking Update" 🌐
+- v0.4 (Alpha) - "The Bug Bust" 🚀 (IN PROGRESS)
+
+To see the full list of changes for each release, please refer to the [CHANGELOG.md](./CHANGELOG.md) file.
+
 ## LICENSE 📜
 
 This software is under the: "GNU GENERAL PUBLIC LICENSE v3.0". Below is a TLDR of this.
