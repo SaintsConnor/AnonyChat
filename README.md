@@ -48,7 +48,7 @@ Any vulnerabilities are taken seriously and regular updates will be given to fix
 
 - The chat program may experience connection issues on certain network configurations.
 - The ban/kick functionality may not work properly in some cases.
-- Some characters may not display properly in the chatroom due to encoding issues.
+- Characters may not display properly in the chatroom due to encoding issues (Fix In Progress).
 
 ## LICENSE 📜
 
